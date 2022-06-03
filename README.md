@@ -21,3 +21,7 @@ You can update postgres password and other variables in helm/values.yaml file or
 * helm install <releaseName> . (for example : helm install vaccinatie_punt_inventaris .)
 You can also install in a different namespace
 * helm install <releaseName> . -n <namespaceName>
+  
+## Please note that backend and frontend services will be running on NodePort. 
+### Port for backend is set to - 30808
+### Port for frontend is set to - 31000
