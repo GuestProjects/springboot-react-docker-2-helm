@@ -2,7 +2,7 @@
 replicaCount: 1
 
 image:
-  repository: 10.131.228.123:5000/vaccinatie_punt_inventaris-main-backend
+  repository: vaccinatie_punt_inventaris-main-backend
   tag: latest
   pullPolicy: IfNotPresent
 
