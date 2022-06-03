@@ -1,0 +1,114 @@
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+type Query {
+	checkJwt(jwt: String!): jwt
+
+    listUser: [User]
+    getUser(id: ID!): User
+
+    listRole: [String]
+    getRole(id: ID!): String! 
+
+	getProduct : Product!
+    listProducts : [Product]
+
+	getLocation(id: ID!) : Location!
+    listLocations : [Location] 
+
+
+    listProductsonLocation (locationId: ID!): [ProductLocation] 
+    listProductsonLocations : [ProductLocation] 
+}
+
+type Mutation {
+    login(input: AuthRequest!) : JwtResponse!
+    createUser(input: SignupRequest!) : User!
+    deleteUser(id: ID!) : Boolean!
+
+	createProduct(input: ProductRequest!) : Product!
+	createLocation(input: LocationRequest!) : Location!
+
+	addProductAtLocation(input: ProductLocationRequest!) : ProductLocation!
+	editProductAtLocation(input: EditProductLocationRequest!) : ProductLocation!
+	deleteProductAtLocation(id: ID!) : DeletedResponse!
+}
+
+type jwt{
+    jwt: String 
+}
+
+type DeletedResponse{
+    deleted: Boolean
+}
+
+type User {
+    id: ID!
+    username: String!
+    password: String!
+}
+
+type Product{
+    id: ID!
+    name: String!
+    expireDate: String
+}
+
+type Location{
+    id: ID!
+    name: String!
+    street: String!
+    city: String!
+    number: Int!
+}
+
+type ProductLocation {
+	id : ID!
+	product : Product!
+	location : Location!
+	amount: Int!
+	expireDate: String!
+}
+
+
+type JwtResponse {
+    token: String!
+    type: String!
+}
+
+input SignupRequest {
+    username: String!
+    password: String!
+	role: [String]
+}
+
+input AuthRequest {
+    username: String!
+    password: String!
+}
+
+input ProductRequest{
+    name: String!
+    expireDate: String
+}
+
+input LocationRequest{
+    name: String!
+    street: String!
+    city: String!
+    number: Int!
+}
+
+input EditProductLocationRequest{
+    id: ID!
+	amount :Int!
+}
+
+input ProductLocationRequest{
+    productId:  ID!
+    locationId:  ID!
+	amount : Int!
+    expireDate: String!
+}
